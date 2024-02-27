@@ -1,0 +1,20 @@
+{
+  "name": "jwt-token-generator",
+  "version": "1.0.0",
+  "description": "A simple Node.js application to generate JWT tokens.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Your Name <your.email@example.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
