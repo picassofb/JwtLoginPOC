@@ -37,7 +37,8 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary mt-3" onclick="generateToken()">Generate Token and Set Iframe</button>
+            <button class="btn btn-primary mt-3" onclick="generateTokenAndSetIframe()">Generate Token and Set Iframe</button>
+            <button class="btn btn-primary mt-3" onclick="generateTokenAndSetNewTab()">Generate Token and Open in New Tab</button>
         </div>
 
         <div class="row mt-3">
@@ -47,7 +48,7 @@
 
         <script>
 
-            function generateToken() {
+            function generateTokenAndSetIframe() {
                 const patient = {
                     registrationNumber: $('#registrationNumber').val(),
                     dob: $('#dob').val()
@@ -75,6 +76,33 @@
                 });
             }
 
+            function generateTokenAndSetNewTab() {
+                const patient = {
+                    registrationNumber: $('#registrationNumber').val(),
+                    dob: $('#dob').val()
+                };
+
+                const secretKey = $('#secretKey').val();
+
+                $.ajax({
+                    url: '/generate-token',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ patient, secretKey }),
+                    success: function(response) {
+                        const patientPortalHostname = $('#patientPortalHostname').val();
+
+                        // Generate the full URL
+                        var newTabUrl = patientPortalHostname + "/account/sso-integration?token=" + encodeURIComponent(response.token);
+                        
+                        // Open the URL in a new tab
+                        window.open(newTabUrl, '_blank');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
         </script>
     </body>
 </html>
