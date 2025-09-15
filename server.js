@@ -14,7 +14,7 @@ app.post('/generate-token', (req, res) => {
     const token = jwt.sign({
         RegistrationNumber: patient.registrationNumber,
         dob: patient.dob
-    }, secretKey, { expiresIn: '1h' });
+    }, secretKey, { expiresIn: '24h' });
 
     res.json({ token });
 });
